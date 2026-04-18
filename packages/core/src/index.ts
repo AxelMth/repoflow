@@ -1,12 +1,7 @@
-export type RepoEntry = {
-  url: string
-  branch?: string
-}
-
-export type RepoflowConfig = {
-  repos: Record<string, RepoEntry>
-}
-
-export function defineConfig(config: RepoflowConfig): RepoflowConfig {
-  return config
-}
+export { defineConfig } from './config/define.js'
+export { loadConfig } from './config/loader.js'
+export type { RepoConfig as Repository, RepoflowConfig, ResolvedConfig } from './config/types.js'
+export { ConfigNotFoundError, ConfigValidationError, MissingEnvVarError } from './config/errors.js'
+export { Repository as Repo } from './repository.js'
+export type { CommitInfo, RepoStatus } from './repository.js'
+export { Workspace } from './workspace.js'

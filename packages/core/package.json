@@ -4,7 +4,10 @@
   "type": "module",
   "license": "MIT",
   "author": "Axel Mathieu-Le Gall <axel@example.com>",
-  "description": "Core types and defineConfig for repoflow",
+  "description": "Core types, config loading, and repository abstractions for repoflow",
+  "engines": {
+    "node": ">=20"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/axelmth/repoflow.git",
@@ -41,7 +44,13 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "simple-git": "^3.27.0",
+    "tsx": "^4.19.0",
+    "zod": "^3.24.0"
+  },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.6.0"
   }
