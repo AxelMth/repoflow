@@ -106,9 +106,8 @@ export const doctorCommand = new Command('doctor')
       if (!repo.isPresent) continue
       try {
         const branch = await repo.currentBranch()
-        const expected = repo['url'] && config.repos.find((r) => r.name === repo.name)?.branch
-          ? (config.repos.find((r) => r.name === repo.name)?.branch ?? config.defaultBranch)
-          : config.defaultBranch
+        const repoConfig = config.repos.find((r) => r.name === repo.name)
+        const expected = repoConfig?.branch ?? config.defaultBranch
         allOk =
           check(
             branch === expected,
