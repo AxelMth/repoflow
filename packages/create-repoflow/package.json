@@ -1,0 +1,48 @@
+{
+  "name": "create-repoflow",
+  "version": "0.0.1",
+  "type": "module",
+  "license": "MIT",
+  "author": "Axel Mathieu-Le Gall <axel@example.com>",
+  "description": "Scaffolding tool for repoflow (npm create repoflow)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axelmth/repoflow.git",
+    "directory": "packages/create-repoflow"
+  },
+  "homepage": "https://github.com/axelmth/repoflow#readme",
+  "bugs": {
+    "url": "https://github.com/axelmth/repoflow/issues"
+  },
+  "keywords": [
+    "meta-repository",
+    "multi-repo",
+    "monorepo",
+    "ci-cd",
+    "github-actions",
+    "release",
+    "automation"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.0"
+  }
+}

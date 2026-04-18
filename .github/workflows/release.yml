@@ -1,0 +1,85 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish'
+        required: true
+        type: choice
+        options:
+          - core
+          - cli
+          - create-repoflow
+          - all
+        default: all
+      dry_run:
+        description: 'Dry run (skip actual publish)'
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Apply changesets
+        uses: changesets/action@v1
+        with:
+          publish: echo "Skipping auto-publish — using manual dispatch below"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish — core
+        if: ${{ !inputs.dry_run && (inputs.package == 'core' || inputs.package == 'all') }}
+        run: pnpm --filter "@axelmth/repoflow-core" publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish — cli
+        if: ${{ !inputs.dry_run && (inputs.package == 'cli' || inputs.package == 'all') }}
+        run: pnpm --filter "@axelmth/repoflow" publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish — create-repoflow
+        if: ${{ !inputs.dry_run && (inputs.package == 'create-repoflow' || inputs.package == 'all') }}
+        run: pnpm --filter "create-repoflow" publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Dry run summary
+        if: ${{ inputs.dry_run }}
+        run: |
+          echo "Dry run complete. No packages were published."
+          echo "Set dry_run=false to publish package: ${{ inputs.package }}"
+          echo ""
+          echo "Requires NPM_TOKEN secret to be set in repository settings."
