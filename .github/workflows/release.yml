@@ -45,27 +45,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish — core
-        if: ${{ !inputs.dry_run && (inputs.package == 'core' || inputs.package == 'all') }}
         run: pnpm --filter "@axelmth/repoflow-core" publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish — cli
-        if: ${{ !inputs.dry_run && (inputs.package == 'cli' || inputs.package == 'all') }}
         run: pnpm --filter "@axelmth/repoflow" publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish — create-repoflow
-        if: ${{ !inputs.dry_run && (inputs.package == 'create-repoflow' || inputs.package == 'all') }}
         run: pnpm --filter "create-repoflow" publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Dry run summary
-        if: ${{ inputs.dry_run }}
-        run: |
-          echo "Dry run complete. No packages were published."
-          echo "Set dry_run=false to publish package: ${{ inputs.package }}"
-          echo ""
-          echo "Requires NPM_TOKEN secret to be set in repository settings."
