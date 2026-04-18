@@ -1,6 +1,6 @@
 {
   "name": "@axelmth/repoflow-core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "author": "Axel Mathieu-Le Gall <axel@example.com>",
