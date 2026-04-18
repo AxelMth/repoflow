@@ -1,23 +1,9 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      package:
-        description: 'Package to publish'
-        required: true
-        type: choice
-        options:
-          - core
-          - cli
-          - create-repoflow
-          - all
-        default: all
-      dry_run:
-        description: 'Dry run (skip actual publish)'
-        required: true
-        type: boolean
-        default: true
+  push:
+    branches:
+      - main
 
 jobs:
   release:
