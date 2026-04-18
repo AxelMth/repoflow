@@ -2,6 +2,8 @@ export type RepoConfig = {
   name: string
   url: string
   branch?: string
+  preprodWorkflow?: string
+  prodWorkflow?: string
 }
 
 export type RepoflowConfig = {

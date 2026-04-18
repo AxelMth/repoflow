@@ -4,6 +4,8 @@ const RepoConfigSchema = z.object({
   name: z.string().min(1, 'Repo name cannot be empty'),
   url: z.string().min(1, 'Repo URL cannot be empty'),
   branch: z.string().optional(),
+  preprodWorkflow: z.string().optional(),
+  prodWorkflow: z.string().optional(),
 })
 
 const SlackConfigSchema = z.object({

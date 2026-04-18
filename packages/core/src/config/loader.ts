@@ -46,7 +46,7 @@ export async function loadConfig(cwd = process.cwd()): Promise<ResolvedConfig> {
   let rawModule: unknown
   try {
     const { tsImport } = await import('tsx/esm/api')
-    rawModule = await tsImport(pathToFileURL(configPath).href, import.meta.url)
+    rawModule = await tsImport(pathToFileURL(configPath).href, pathToFileURL(configPath).href)
   } catch (e) {
     if (e instanceof ConfigValidationError) throw e
     throw new ConfigValidationError(
