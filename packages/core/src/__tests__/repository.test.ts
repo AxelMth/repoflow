@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs'
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
-import simpleGit from 'simple-git'
+import { simpleGit } from 'simple-git'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { Repository } from '../repository.js'
 
@@ -50,6 +50,24 @@ describe('Repository.clone', () => {
     const target = join(tempDir, 'clone-1')
     const repo = new Repository({ name: 'test', url: sourceDir, path: target })
     await repo.clone()
+    expect(existsSync(join(target, 'README.md'))).toBe(true)
+  })
+
+  it('honours GIT_* variables from the ambient environment', async () => {
+    const target = join(tempDir, 'clone-env')
+    const repo = new Repository({ name: 'test', url: 'repoflow-alias:source', path: target })
+    Object.assign(process.env, {
+      GIT_CONFIG_COUNT: '1',
+      GIT_CONFIG_KEY_0: `url.${sourceDir}.insteadOf`,
+      GIT_CONFIG_VALUE_0: 'repoflow-alias:source',
+    })
+    try {
+      await repo.clone()
+    } finally {
+      delete process.env.GIT_CONFIG_COUNT
+      delete process.env.GIT_CONFIG_KEY_0
+      delete process.env.GIT_CONFIG_VALUE_0
+    }
     expect(existsSync(join(target, 'README.md'))).toBe(true)
   })
 

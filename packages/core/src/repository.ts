@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import { mkdir } from 'node:fs/promises'
 import { dirname } from 'node:path'
-import simpleGit from 'simple-git'
+import { simpleGit, type SimpleGitOptions } from 'simple-git'
 
 export type RepoStatus = {
   ahead: number
@@ -14,6 +14,12 @@ export type CommitInfo = {
   sha: string
   subject: string
   author: string
+}
+
+// simple-git v4 strips ambient GIT_* (and EDITOR, PAGER, SSH_ASKPASS...) variables from the git
+// process; pass them through so user-configured auth and transport (GIT_SSH_COMMAND, ...) keep working.
+function createGit(options: Partial<SimpleGitOptions> = {}) {
+  return simpleGit({ ...options, allowEnvironment: Object.keys(process.env) })
 }
 
 type RepositoryOptions = {
@@ -34,7 +40,7 @@ export class Repository {
   }
 
   private get git() {
-    return simpleGit({ baseDir: this.path })
+    return createGit({ baseDir: this.path })
   }
 
   get isPresent(): boolean {
@@ -44,7 +50,7 @@ export class Repository {
   async clone(): Promise<void> {
     if (this.isPresent) return
     await mkdir(dirname(this.path), { recursive: true })
-    await simpleGit().clone(this.url, this.path)
+    await createGit().clone(this.url, this.path)
   }
 
   async pull(): Promise<void> {

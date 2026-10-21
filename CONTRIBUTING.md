@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - **Node.js** 22+
-- **pnpm** 9+ (`npm i -g pnpm`)
+- **pnpm** 12+ (`npm i -g pnpm`)
 
 ## Setup
 
