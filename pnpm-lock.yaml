@@ -192,34 +192,34 @@ importers:
   .:
     devDependencies:
       '@changesets/cli':
-        specifier: ^2.27.0
+        specifier: 2.31.0
         version: 2.31.0(@types/node@22.19.17)
       '@eslint/js':
-        specifier: ^10.0.1
+        specifier: 10.0.1
         version: 10.0.1(eslint@9.39.4(supports-color@7.2.0))
       '@vitest/coverage-v8':
-        specifier: ^3.0.0
+        specifier: 3.2.4
         version: 3.2.4(supports-color@7.2.0)(vitest@3.2.4(@types/node@22.19.17)(supports-color@7.2.0)(tsx@4.21.0))
       eslint:
-        specifier: ^9.0.0
+        specifier: 9.39.4
         version: 9.39.4(supports-color@7.2.0)
       eslint-config-prettier:
-        specifier: ^9.0.0
+        specifier: 9.1.2
         version: 9.1.2(eslint@9.39.4(supports-color@7.2.0))
       prettier:
-        specifier: ^3.0.0
+        specifier: 3.8.3
         version: 3.8.3
       tsup:
-        specifier: ^8.0.0
+        specifier: 8.5.1
         version: 8.5.1(postcss@8.5.10)(supports-color@7.2.0)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
-        specifier: ^5.6.0
+        specifier: 5.9.3
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.0.0
+        specifier: 8.58.2
         version: 8.58.2(eslint@9.39.4(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
       vitest:
-        specifier: ^3.0.0
+        specifier: 3.2.4
         version: 3.2.4(@types/node@22.19.17)(supports-color@7.2.0)(tsx@4.21.0)
 
   packages/cli:
@@ -228,60 +228,60 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@clack/prompts':
-        specifier: ^0.9.0
+        specifier: 0.9.1
         version: 0.9.1
       cli-table3:
-        specifier: ^0.6.5
+        specifier: 0.6.5
         version: 0.6.5
       commander:
-        specifier: ^12.0.0
+        specifier: 12.1.0
         version: 12.1.0
       execa:
-        specifier: ^9.0.0
+        specifier: 9.6.1
         version: 9.6.1
       picocolors:
-        specifier: ^1.0.0
+        specifier: 1.1.1
         version: 1.1.1
     devDependencies:
       '@types/node':
-        specifier: ^22.0.0
+        specifier: 22.19.17
         version: 22.19.17
       tsup:
-        specifier: ^8.0.0
+        specifier: 8.5.1
         version: 8.5.1(postcss@8.5.10)(supports-color@7.2.0)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
-        specifier: ^5.6.0
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/core:
     dependencies:
       simple-git:
-        specifier: ^3.27.0
+        specifier: 3.36.0
         version: 3.36.0(supports-color@7.2.0)
       tsx:
-        specifier: ^4.19.0
+        specifier: 4.21.0
         version: 4.21.0
       zod:
-        specifier: ^3.24.0
+        specifier: 3.25.76
         version: 3.25.76
     devDependencies:
       '@types/node':
-        specifier: ^22.0.0
+        specifier: 22.19.17
         version: 22.19.17
       tsup:
-        specifier: ^8.0.0
+        specifier: 8.5.1
         version: 8.5.1(postcss@8.5.10)(supports-color@7.2.0)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
-        specifier: ^5.6.0
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/create-repoflow:
     devDependencies:
       tsup:
-        specifier: ^8.0.0
+        specifier: 8.5.1
         version: 8.5.1(postcss@8.5.10)(supports-color@7.2.0)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
-        specifier: ^5.6.0
+        specifier: 5.9.3
         version: 5.9.3
 
 packages:
